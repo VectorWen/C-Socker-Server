@@ -252,7 +252,6 @@ bool destroy_pool(thread_pool *pool)
 	// 3, free memories
 	free(pool->task_list);
 	free(pool->tids);
-	free(pool);
 
 	return true;
 }

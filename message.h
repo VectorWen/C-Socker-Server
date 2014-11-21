@@ -1,14 +1,18 @@
 #ifndef __MESSAGE_H_
 #define __MESSAGE_H_
 
-struct message
+
+#include "json.h"
+
+typedef struct message
 {
+	json_object *json_obj;
 	int code;
 	char * content;
-};
+}message;
 
-struct message message_parse_for_json(char * json);
-char * message_to_json_string(struct message msg);
-struct message message_parse_for_socket(int sockfd);
+void message_parse_for_json(message *msg,char * json);
+void message_parse_for_socket(message *msg,int sockfd);
+char * message_to_json_string(message* msg);
 
 #endif//__MESSAGE_H_
