@@ -1,5 +1,5 @@
 #ifndef _THREAD_POOL_H_
-#define _THREAD_POOL_H_eee
+#define _THREAD_POOL_H_
 
 #include <stdio.h>
 #include <stdbool.h>
