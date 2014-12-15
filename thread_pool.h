@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include <strings.h>DDD
+#include <strings.h>
 
 #include <errno.h>
 #include <pthread.h>
