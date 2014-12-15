@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
-
+dddd
 #include <errno.h>
 #include <pthread.h>
 
