@@ -3,22 +3,33 @@
 #include "server.h"
 #include "message.h"
 
-void  callback	(int sockfd)
+void  task(int sockfd,void *arg)
 {
-	struct message msg = message_parse_for_socket(sockfd);
-    printf("code = %d, content = %s\n", msg.code,msg.content);
+	message msg;
+	message_parse_for_socket(&msg,sockfd);
+	if(msg.cmd == 1)
+	{
+		if(strcmp(msg.username,"vector")&&strcmp(msg.passwd,"123456"))
+		{
+			msg.code = 200;
+			msg.sessionid=7463297;
+		}else{
+			msg.code = 500;
+		}
+	}else{
+		msg.code = 400;
+	}
+    char* json = message_to_json_string(&msg);
 
-    msg.code = 200;
-    msg.content = "ok";
-    char* json = message_to_json_string(msg);
-
-    write(sockfd,json,sizeof json);
-
+    write(sockfd,json,strlen(json));
 }
 
 int main(int argc, char const *argv[])
 {
-	server_init(8080);
-	server_accept(callback);
+	server serv;
+	
+	server_init(&serv,8080);
+	//int server_accept(server *serv,void (* task)(int sockfd,void *arg),void *arg);
+	server_accept(&serv,task,NULL);
 	return 0;
 }
